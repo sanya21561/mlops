@@ -1,0 +1,26 @@
+[cerebrium.deployment]
+name = "mtailor-mlops"
+python_version = "3.10"
+include = ["main.py", "model.py", "model.onnx", "requirements.txt", "cerebrium.toml", "Dockerfile"]
+exclude = [".*", "images/*", "venv/*", "__pycache__/*", "*.DS_Store", "README.md", "test*.py", "convert_to_onnx.py", "pytorch_model.py", "weights/*"]
+
+[cerebrium.hardware]
+cpu = 2.0
+memory = 12.0
+compute = "CPU"
+
+[cerebrium.runtime.custom]
+port = 8000
+healthcheck_endpoint = "/health"
+dockerfile_path = "./Dockerfile"
+
+[cerebrium.scaling]
+min_replicas = 1
+max_replicas = 5
+cooldown = 30
+replica_concurrency = 1
+response_grace_period = 900
+scaling_metric = "concurrency_utilization"
+scaling_target = 100
+scaling_buffer = 0
+roll_out_duration_seconds = 0
