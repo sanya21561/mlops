@@ -13,18 +13,15 @@ class TestImagePreprocessor(unittest.TestCase):
     def setUp(self):
         self.preprocessor = ImagePreprocessor()
         self.test_image_path = "images/n01440764_tench.jpeg"
-        # Suppress logging output during tests that expect errors
         logging.getLogger('model').setLevel(logging.CRITICAL)
         logging.getLogger('__main__').setLevel(logging.CRITICAL)
 
     def tearDown(self):
-        # Reset logging levels after tests
         logging.getLogger('model').setLevel(logging.INFO)
         logging.getLogger('__main__').setLevel(logging.INFO)
 
     def test_preprocess_with_path(self):
         """Test preprocessing with image path."""
-        # Ensure logging is at default level for successful tests if needed, or keep suppressed
         logging.getLogger('model').setLevel(logging.INFO)
         logging.getLogger('__main__').setLevel(logging.INFO)
         result = self.preprocessor.preprocess(self.test_image_path)
